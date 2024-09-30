@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .total-info {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        img {
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>List of Authors</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Details</th>
+            <th>Picture</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set total_books= 0 %}
+        {% for author in authors %}
+        <tr>
+            <td>{{ author.id }}</td>
+            <td>{{ author.username|upper() }}</td>
+            <td>{{ author.email }}</td>
+            <td>
+                <a href="{{ path('app_authorDetails', { 'id': author.id }) }}">Details</a>
+            </td>
+            <td>
+                <img src="{{ asset(author.picture) }}" alt="{{ author.username }}" width="100" height="100">
+            </td>
+        </tr>
+        {% set total_books = total_books + author.nb_books %}
+        {% else %}
+        <tr>
+            <td colspan="5" style="text-align:center;">No Authors found!</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="total-info">
+    <h3>Total Books = {{ total_books }}</h3>
+    <h3>The number of authors: {{ authors | length }}</h3>
+</div>
+
+</body>
+</html>
