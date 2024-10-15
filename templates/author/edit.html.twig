@@ -1,0 +1,17 @@
+<h1>Update Author</h1>
+
+    {{ form_start(authorform) }}
+    <table>
+        <tr>
+            <td>{{ form_label(authorform.username, "The username") }}</td>
+            <td>{{ form_label(authorform.email, "The email") }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_widget(authorform.username) }}</td>
+            <td>{{ form_widget(authorform.email) }}</td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-success">Update</button>
+    {{ form_end(authorform) }}
+
+    <a href="{{ path('listauthors') }}">Back to list</a>
